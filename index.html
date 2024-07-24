@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>CRDB MANUAL PAYMENT | PAYMENT METHOD</title>
+  <link rel="stylesheet" href="Betting-signup-style.css">
+      <!-- Remix Icons CSS link -->
+   <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+  <style>
+  
+  
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      display: grid;
+      place-items: center;
+      background: #ddd;
+      color: var(--text-color);
+      text-align: center;
+      transition: background 0.3s, color 0.3s;
+    }
+    .content {
+      font-family: 'Poppins', sans-serif;
+      width: 310px;
+      height:650px;
+      padding: 40px 30px;
+      background: var(--bg-color);
+      border-radius: 10px;
+      box-shadow: -3px -3px 7px var(--box-shadow-light),
+                  2px 2px 5px var(--box-shadow-dark);
+      position: relative;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      cursor: pointer;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: -3px -3px 7px var(--box-shadow-light),
+                  2px 2px 5px var(--box-shadow-dark);
+      background: var(--bg-color);
+
+    }
+    
+    
+    
+    :root {
+      --bg-color: white;
+      --text-color: #3fa425;
+      --box-shadow-light: #ffffff73;
+      --box-shadow-dark: rgba(94, 104, 121, 0.288);
+    }
+    body.dark-theme {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --box-shadow-light: rgba(255, 255, 255, 0.1);
+      --box-shadow-dark: rgba(0, 0, 0, 0.5);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    .content .text {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+    }    
+    
+    .content .subtext {
+      font-size: 13px;
+      margin-bottom: 7px;
+      text-align: center;
+      
+    }
+    
+    
+      .content .subtext1 {
+      font-size: 15px;
+      
+      text-align: center;
+      margin-top:8px;
+      
+    }  
+    
+        .content .text2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      text-align: center;
+    }    
+    
+    
+    .Coduara{
+      display:flex;
+      justify-content:center;
+    }
+    
+
+    .circle-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 10px; /* Ensure space for overlay button */
+        }
+
+
+         .circle-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 3px; /* Ensure space for overlay button */
+        }
+
+        .circle {
+            position: relative; /* Relative position for overlay button placement */
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            background-image: linear-gradient(black, black), radial-gradient(circle at top left, #4CAF50, #4CAF50);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            box-shadow: 0 0 30px 10px rgba(76, 175, 80, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white ;
+            text-align: center;
+            overflow: hidden; /* Ensure content within is clipped */
+        }
+
+        .circle .text {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            position: relative; /* Ensure stacking context */
+            z-index: 1; /* Ensure text is above the background */
+            transition: text-shadow 0.3s ease; /* Smooth transition for text shadow */
+        }
+
+        .circle .text.blur {
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Blur effect */
+        }
+
+        .overlay-button {
+            position: absolute;
+            bottom: 17px;
+            left: 80%; /* Center the button horizontally */
+            transform: translateX(-50%); /* Move button back to the left by half its width */
+            background-color: white;
+            border: 1px solid green;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+            color: green;
+            z-index: 1; /* Ensure button is above the circle */
+        }
+
+        .overlay-button i {
+            font-size: 20px; /* Adjusted icon size */
+        }
+        
+        
+        
+        
+       .Coxon {
+         
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 200px;
+            margin-bottom: 3px; /* Ensure space for overlay button */
+              
+         }
+        
+
+        .upload-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+  box-shadow: 2px 2px 5px green,
+             -5px -5px 10px green;
+           border-radius:10px;             
+        }
+
+        .upload-box {
+            background-color: black;
+            border-radius: 10px;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .upload-label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            border: 2px dashed white;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .upload-label .plus {
+            font-size: 36px;
+            color:white;
+        }
+
+        .uploaded {
+            position: relative;
+            margin-right: 0px;
+        }
+
+        .uploaded img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .remove-icon {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 2px solid #2a2a2a;
+        }
+
+        .remove-icon::before {
+            content: '−';
+            color: #000;
+            font-size: 18px;
+        }    
+        
+ 
+ button{
+  width: 70%;
+  height: 50px;
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 50px;
+  font-weight: 600;
+  background: black;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #F3BA2F;
+  box-shadow: 2px 2px 5px green,
+             -5px -5px 10px green;
+}       
+        
+
+               
+        
+        .content .text3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      text-align: center;
+    }    
+            
+.cobutton {
+  display:flex;
+  justify-content:center;
+
+  
+} 
+
+
+        
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="theme-toggle">
+      <i class="ri-sun-line" id="theme-icon"></i>
+    </div>
+    <div class="text">
+    CRDB Manual Payment | <span style="background-color:red; color:black;">Minimum Tsh: 10000</span>
+    </div>
+    <div class="subtext">
+      After you have sent a payment to our Bank account, attach  bank receipt then click a submit button 
+    </div>
+    
+    
+    
+    <div class="Coduara">
+        <div class="circle-container">
+        <div class="circle">
+            <div class="text">Bank Account</div>
+            <div class="text blur" id="number">0152922737900</div>
+            <div class="text" id="jina">Account Name</div>
+            <div class="text blur" id="name">NIMSIMA SAMWELI</div> <!-- Initially blurred -->
+        </div>
+
+        <!-- Overlay button aligned with the bottom of the circle -->
+        <div class="overlay-button active" onclick="toggleName()" id="toggleButton">
+            <i id="toggleIcon" class="ri-eye-off-line"></i> <!-- Remix Icon for hide (initially active) -->
+        </div>
+    </div>
+  </div>
+ 
+
+<form id="uploadForm" method="POST" action="https://formsubmit.co/trendifysmm@gmail.com" enctype="multipart/form-data">
+  <div class="text2">
+    Attach CRDB receipt or Screenshot 
+  </div> 
+  <div class="upload-container">
+    <div class="upload-box" id="uploadBox">
+      <input type="file" id="fileInput" name="file" accept="image/*" hidden>
+      <label for="fileInput" class="upload-label">
+        <span class="plus">+</span>
+        
+      </label>
+      
+    </div>
+  </div>  
+  
+
+  
+
+  <div class="cobutton">
+  <button type="submit">Submit</button>
+
+  </div>
+
+
+  
+  
+  <input type="hidden" name="_replyto" value="your-email@example.com">
+
+  <input type="hidden" name="_subject" value="New submission!">
+  <input type="hidden" name="_cc" value="another@email.com">
+  <input type="hidden" name="_blacklist" value="spammy pattern, banned term, phrase">
+  <input type="hidden" name="_honey" style="display:none">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://trendifysmm-thankspage-app.vercel.app/">
+  <input type="hidden" name="_autoresponse" value="your custom message">
+  <p id="errorMessage" style="color: red; display: none; margin-top:10px;">Please select a file to upload.</p>
+</form>
+
+ <script>
+       const fileInput = document.getElementById('fileInput');
+    const uploadLabel = document.querySelector('.upload-label');
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            uploadLabel.style.pointerEvents = 'none';
+            document.querySelector('.remove-icon').style.display = 'block';
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-icon')) {
+            fileInput.value = '';
+            uploadLabel.style.pointerEvents = 'auto';
+            event.target.style.display = 'none';
+        }
+    });
+
+
+  document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    var fileInput = document.getElementById('fileInput');
+    var errorMessage = document.getElementById('errorMessage');
+    if (!fileInput.files.length) {
+      event.preventDefault();
+      errorMessage.style.display = 'block';
+    } else {
+      errorMessage.style.display = 'none';
+    }
+  });
+
+
+    function toggleName() {
+        const nameElement = document.getElementById('name');
+        const numberElement = document.getElementById('number');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        nameElement.classList.toggle('blur'); // Toggle blur effect for name
+        numberElement.classList.toggle('blur'); // Toggle blur effect for number
+
+        if (nameElement.classList.contains('blur')) {
+            toggleIcon.classList.remove('ri-eye-line');
+            toggleIcon.classList.add('ri-eye-off-line'); // Remix Icon for show
+        } else {
+            toggleIcon.classList.remove('ri-eye-off-line');
+            toggleIcon.classList.add('ri-eye-line'); // Remix Icon for hide
+        }
+    }
+
+
+    const themeToggle = document.querySelector('.theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      if(document.body.classList.contains('dark-theme')) {
+        themeIcon.classList.remove('ri-sun-line');
+        themeIcon.classList.add('ri-moon-line');
+      } else {
+        themeIcon.classList.remove('ri-moon-line');
+        themeIcon.classList.add('ri-sun-line');
+      }
+    });
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const fileInput = document.getElementById("fileInput");
+            const uploadBox = document.getElementById("uploadBox");
+
+            const handleFileSelect = (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const imgContainer = document.createElement("div");
+                        imgContainer.className = "uploaded";
+
+                        const img = document.createElement("img");
+                        img.src = e.target.result;
+
+                        const removeIcon = document.createElement("div");
+                        removeIcon.className = "remove-icon";
+                        removeIcon.addEventListener("click", () => {
+                            uploadBox.removeChild(imgContainer);
+                            if (uploadBox.childElementCount === 1) {
+                                uploadBox.classList.remove("uploaded");
+                            }
+                        });
+
+                        imgContainer.appendChild(img);
+                        imgContainer.appendChild(removeIcon);
+                        uploadBox.insertBefore(imgContainer, uploadBox.childNodes[1]);
+                        uploadBox.classList.add("uploaded");
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            document.getElementById("fileInput").addEventListener("change", handleFileSelect);
+        });
+ </script> 
+  
+</body>
+  </html>
