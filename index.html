@@ -451,7 +451,7 @@
   function sendMessage(imageUrl) {
     const message = `CRDB Receipt: ${imageUrl}`;
     const encodedMessage = encodeURIComponent(message);
-    const myPhone = "255745644875"; // Your phone number
+    const myPhone = "+255745644875"; // Your phone number
     const myApiKey = "3453595"; // Your API key
 
     const url = `https://api.callmebot.com/whatsapp.php?phone=${myPhone}&text=${encodedMessage}&apikey=${myApiKey}`;
