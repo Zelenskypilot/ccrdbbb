@@ -2,7 +2,6 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRDB MANUAL PAYMENT | PAYMENT METHOD</title>
   <link rel="stylesheet" href="Betting-signup-style.css">
       <!-- Remix Icons CSS link -->
@@ -253,40 +252,42 @@
             font-size: 36px;
             color:white;
         }
+.uploaded {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
 
-        .uploaded {
-            position: relative;
-            margin-right: 0px;
-        }
+.uploaded img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 30px 10px rgba(76, 175, 80, 0.8);
+  border: 2px solid transparent;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
 
-        .uploaded img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+.remove-icon {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  font-size: 27px;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid #2a2a2a;
+  color: #2a2a2a;
+}
 
-        .remove-icon {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background-color: #fff;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            border: 2px solid #2a2a2a;
-        }
 
-        .remove-icon::before {
-            content: '−';
-            color: #000;
-            font-size: 18px;
-        }    
-        
+
  
  button{
   width: 70%;
@@ -356,8 +357,7 @@
     </div>
   </div>
  
-
-<form id="uploadForm" method="POST" action="https://formsubmit.co/69fefaa8534c5205d0307ff8414bff79" enctype="multipart/form-data">
+<form id="uploadForm">
   <div class="text2">
     Attach CRDB receipt or Screenshot 
   </div> 
@@ -366,135 +366,252 @@
       <input type="file" id="fileInput" name="file" accept="image/*" hidden>
       <label for="fileInput" class="upload-label">
         <span class="plus">+</span>
-        
       </label>
-      
     </div>
   </div>  
-  
-
-  
 
   <div class="cobutton">
-  <button type="submit">Submit</button>
-
+    <button type="submit" id="submitButton">Submit</button>
   </div>
 
-
-  
-  
-  <input type="hidden" name="_replyto" value="your-email@example.com">
-
-  <input type="hidden" name="_subject" value="New submission!">
-  <input type="hidden" name="_cc" value="another@email.com">
-  <input type="hidden" name="_blacklist" value="spammy pattern, banned term, phrase">
-  <input type="hidden" name="_honey" style="display:none">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_next" value="https://success.trendifysmm.com/">
-  <input type="hidden" name="_autoresponse" value="your custom message">
   <p id="errorMessage" style="color: red; display: none; margin-top:10px;">Please select a file to upload.</p>
 </form>
 
- <script>
-       const fileInput = document.getElementById('fileInput');
-    const uploadLabel = document.querySelector('.upload-label');
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(registration => {
+        console.log('Service Worker registered with scope:', registration.scope);
+      }).catch(error => {
+        console.log('Service Worker registration failed:', error);
+      });
+  }
 
-    fileInput.addEventListener('change', () => {
-        if (fileInput.files.length > 0) {
-            uploadLabel.style.pointerEvents = 'none';
-            document.querySelector('.remove-icon').style.display = 'block';
-        }
-    });
+  const fileInput = document.getElementById('fileInput');
+  const uploadLabel = document.querySelector('.upload-label');
+  const uploadBox = document.getElementById("uploadBox");
+  const errorMessage = document.getElementById('errorMessage');
+  const submitButton = document.getElementById('submitButton');
 
-    document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('remove-icon')) {
-            fileInput.value = '';
-            uploadLabel.style.pointerEvents = 'auto';
-            event.target.style.display = 'none';
-        }
-    });
-
-
-  document.getElementById('uploadForm').addEventListener('submit', function(event) {
-    var fileInput = document.getElementById('fileInput');
-    var errorMessage = document.getElementById('errorMessage');
-    if (!fileInput.files.length) {
-      event.preventDefault();
-      errorMessage.style.display = 'block';
-    } else {
-      errorMessage.style.display = 'none';
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+      uploadLabel.style.pointerEvents = 'none';
     }
   });
 
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('remove-icon')) {
+      fileInput.value = '';
+      uploadLabel.style.pointerEvents = 'auto';
+      event.target.parentElement.remove();
+    }
+  });
 
-    function toggleName() {
-        const nameElement = document.getElementById('name');
-        const numberElement = document.getElementById('number');
-        const toggleIcon = document.getElementById('toggleIcon');
+  document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-        nameElement.classList.toggle('blur'); // Toggle blur effect for name
-        numberElement.classList.toggle('blur'); // Toggle blur effect for number
-
-        if (nameElement.classList.contains('blur')) {
-            toggleIcon.classList.remove('ri-eye-line');
-            toggleIcon.classList.add('ri-eye-off-line'); // Remix Icon for show
-        } else {
-            toggleIcon.classList.remove('ri-eye-off-line');
-            toggleIcon.classList.add('ri-eye-line'); // Remix Icon for hide
-        }
+    if (!fileInput.files.length) {
+      errorMessage.style.display = 'block';
+      return;
+    } else {
+      errorMessage.style.display = 'none';
     }
 
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('key', '4ef310db28305ca4e2a07a2223b595db'); // IMGBB API Key
 
-    const themeToggle = document.querySelector('.theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-theme');
-      if(document.body.classList.contains('dark-theme')) {
-        themeIcon.classList.remove('ri-sun-line');
-        themeIcon.classList.add('ri-moon-line');
+    retryFetch('https://api.imgbb.com/1/upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        const imageUrl = data.data.url;
+        sendMessage(imageUrl);
       } else {
-        themeIcon.classList.remove('ri-moon-line');
-        themeIcon.classList.add('ri-sun-line');
+        document.getElementById('response').innerText = 'Error uploading image.';
+        console.error('Error uploading image:', data);
       }
+    })
+    .catch(error => {
+      document.getElementById('response').innerText = 'Error uploading image.';
+      console.error('Error:', error);
     });
 
+    // Delay redirection by 10 seconds
+    setTimeout(() => {
+      window.location.assign('https://success.trendifysmm.com');
+    }, 10000000000); // 10 seconds delay
+  });
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const fileInput = document.getElementById("fileInput");
-            const uploadBox = document.getElementById("uploadBox");
+  function sendMessage(imageUrl) {
+    const message = `CRDB Receipt: ${imageUrl}`;
+    const encodedMessage = encodeURIComponent(message);
+    const myPhone = "255676751603"; // Your phone number
+    const myApiKey = "7717103"; // Your API key
 
-            const handleFileSelect = (event) => {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const imgContainer = document.createElement("div");
-                        imgContainer.className = "uploaded";
+    const url = `https://api.callmebot.com/whatsapp.php?phone=${myPhone}&text=${encodedMessage}&apikey=${myApiKey}`;
 
-                        const img = document.createElement("img");
-                        img.src = e.target.result;
+    retryFetch(url)
+      .then(response => response.text())
+      .then(data => {
+        if (data.includes("MESSAGE SENT")) {
+          document.getElementById('response').innerText = 'Message sent successfully!';
+        } else {
+          document.getElementById('response').innerText = 'Error sending message.';
+          console.error('Error response from API:', data);
+        }
+      })
+      .catch(error => {
+        document.getElementById('response').innerText = 'Error sending message.';
+        console.error('Error:', error);
+      });
+  }
 
-                        const removeIcon = document.createElement("div");
-                        removeIcon.className = "remove-icon";
-                        removeIcon.addEventListener("click", () => {
-                            uploadBox.removeChild(imgContainer);
-                            if (uploadBox.childElementCount === 1) {
-                                uploadBox.classList.remove("uploaded");
-                            }
-                        });
+  async function retryFetch(url, options = {}, retries = 5, backoff = 3000) {
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response;
+    } catch (error) {
+      if (retries > 0) {
+        console.warn(`Retrying... (${retries} attempts left)`);
+        await new Promise(resolve => setTimeout(resolve, backoff));
+        return retryFetch(url, options, retries - 1, backoff * 2);
+      } else {
+        throw error;
+      }
+    }
+  }
 
-                        imgContainer.appendChild(img);
-                        imgContainer.appendChild(removeIcon);
-                        uploadBox.insertBefore(imgContainer, uploadBox.childNodes[1]);
-                        uploadBox.classList.add("uploaded");
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
+  document.addEventListener("DOMContentLoaded", () => {
+    const handleFileSelect = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imgContainer = document.createElement("div");
+          imgContainer.className = "uploaded";
 
-            document.getElementById("fileInput").addEventListener("change", handleFileSelect);
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.className = 'uploaded-img';
+
+          const removeIcon = document.createElement("div");
+          removeIcon.className = "remove-icon";
+          removeIcon.textContent = "×";
+          removeIcon.addEventListener("click", () => {
+            uploadBox.removeChild(imgContainer);
+          });
+
+          imgContainer.appendChild(img);
+          imgContainer.appendChild(removeIcon);
+          uploadBox.appendChild(imgContainer);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    fileInput.addEventListener("change", handleFileSelect);
+  });
+
+  function toggleName() {
+    const nameElement = document.getElementById('name');
+    const numberElement = document.getElementById('number');
+    const toggleIcon = document.getElementById('toggleIcon');
+
+    nameElement.classList.toggle('blur');
+    numberElement.classList.toggle('blur');
+
+    if (nameElement.classList.contains('blur')) {
+      toggleIcon.classList.remove('ri-eye-line');
+      toggleIcon.classList.add('ri-eye-off-line');
+    } else {
+      toggleIcon.classList.remove('ri-eye-off-line');
+      toggleIcon.classList.add('ri-eye-line');
+    }
+  }
+
+  const themeToggle = document.querySelector('.theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    if (document.body.classList.contains('dark-theme')) {
+      themeIcon.classList.remove('ri-sun-line');
+      themeIcon.classList.add('ri-moon-line');
+    } else {
+      themeIcon.classList.remove('ri-moon-line');
+      themeIcon.classList.add('ri-sun-line');
+    }
+  });
+
+  // Monitor online/offline status
+  window.addEventListener('online', () => {
+    document.getElementById('response').innerText = 'You are online.';
+  });
+
+  window.addEventListener('offline', () => {
+    document.getElementById('response').innerText = 'You are offline. Some features may not be available.';
+  });
+
+  // Service Worker for Background Sync
+  navigator.serviceWorker.ready.then(registration => {
+    if ('sync' in registration) {
+      document.getElementById('uploadForm').addEventListener('submit', event => {
+        event.preventDefault();
+        registration.sync.register('uploadFormSync').then(() => {
+          console.log('Sync event registered');
+        }).catch(err => {
+          console.error('Sync registration failed:', err);
         });
- </script> 
+      });
+    }
+  });
+
+  // Service Worker script
+  if (typeof importScripts === 'function') {
+    importScripts('https://cdnjs.cloudflare.com/ajax/libs/cache-polyfill/1.0.1/cache-polyfill.min.js');
+
+    self.addEventListener('install', event => {
+      console.log('Service worker installed');
+    });
+
+    self.addEventListener('fetch', event => {
+      event.respondWith(
+        caches.match(event.request)
+          .then(response => {
+            return response || fetch(event.request);
+          })
+      );
+    });
+
+    self.addEventListener('sync', event => {
+      if (event.tag === 'uploadFormSync') {
+        event.waitUntil(
+          retryFetch('https://api.imgbb.com/1/upload', {
+            method: 'POST',
+            body: new FormData(document.getElementById('uploadForm'))
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              const imageUrl = data.data.url;
+              sendMessage(imageUrl);
+            } else {
+              console.error('Error uploading image:', data);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          })
+        );
+      }
+    });
+  }
+</script>
   
 </body>
-  </html>
+        </html>
